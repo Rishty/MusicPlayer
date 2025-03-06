@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            background: #270101;
+            height: 100vh;
+            display: flex;
+
+        }
+
+        .col:nth-child(1) {
+            width: 35%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .col:nth-child(2) {
+            width: 65%;
+        }
+
+        .item1 {
+            background-color: #fff;
+            height: 450px;
+            border-radius: 10px;
+        }
+
+
+        .thumbnail {
+            padding-top: 20px;
+
+        }
+
+        #img {
+            border-radius: 100%;
+
+        }
+
+        .heading1 {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .txt1 {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .icons {
+            display: flex;
+            justify-content: space-around;
+            font-size: 30px;
+            margin-top: 10px;
+        }
+
+        .song1 {
+            display: flex;
+            cursor: pointer;
+
+        }
+
+        .col {
+            margin-left: 300px;
+            margin-top: 60px;
+        }
+
+        .heading {
+            color: #fff;
+            margin-left: 30px;
+            margin-top: 20px;
+
+        }
+
+
+        .txt {
+            color: #fff;
+            margin-left: 30px;
+
+        }
+
+        .song1 {
+            background: #44434360;
+            margin: 2px;
+            width: 300px;
+            border-radius: 10px;
+            height: 100px;
+
+        }
+
+        .img1 {
+            padding: 15px;
+        }
+
+
+        .icons i {
+            cursor: pointer;
+        }
+       
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="col">
+           
+            <div class="item1">
+                <div class="thumbnail"><img id="img" src='' alt="" width="300px" height="300px"></div>
+                <div class="heading1">
+                    <h1 id="heading"></h1>
+                </div>
+                <div class="txt1">
+                    <p id="txt"></p>
+                </div>
+                <div class="bar"></div>
+                <div class="icons">
+                    <i class="bi bi-shuffle"></i>
+                    <i class="bi bi-skip-start-fill" onclick="changeSong(0)"></i>
+                    <i class="bi bi-play-circle-fill" id="playpause" onclick="ply(this.class)"></i>
+                    <i class="bi bi-skip-end-fill" onclick="changeSong(1)"></i>
+                    <i class="bi bi-arrow-clockwise"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+
+            <div class="item2">
+
+            </div>
+        </div>
+    </div>
+    
+    
+    <script>
+
+
+        let img = document.getElementById('img');
+        let heading = document.getElementById('heading');
+        let txt = document.getElementById('txt');
+        let music = new Audio;
+        let playpause = document.getElementById('playpause');
+
+        let songs = [
+            {
+                img: 'small-sidhu-moose-wala-punjabi-singer-poster-multicolor-photo-original-imagfedqwthzxazu.webp',
+                heading: 'Hathyar',
+                txt: 'Sidhu Moose Wala',
+                song:'WhatsApp Audio 2025-03-06 at 9.26.16 PM (1).mp3'
+            },
+
+            {
+                img: 'Mera-Punjab-Punjabi-2018-20180713090011-500x500.jpg',
+                heading: 'Mera Punjab',
+                txt: 'Mera Punjab-Rami Randhawa:Song Lyrics',
+                song:'WhatsApp Audio 2025-03-06 at 9.26.15 PM.mp3'
+            },
+
+            {
+                img: 'b6d19301a60f727b4a4f42ed0840855c.jpg',
+                heading: 'Dear Maa',
+                txt: 'Sidhu Moose Wala',
+                song:'WhatsApp Audio 2025-03-06 at 9.26.17 PM.mp3'
+            },
+
+            {
+                img: 'images.jpg',
+                heading: 'Bapu',
+                txt: 'Sidhu Moose Wala',
+                song:'WhatsApp Audio 2025-03-06 at 9.44.33 PM.mp3'
+            },
+
+            {
+                img: 'Dark-Love-Punjabi-2023-20230112124739-500x500.jpg',
+                heading: 'Dark Love',
+                txt: 'Sidhu Moose Wala',
+                song:'WhatsApp Audio 2025-03-06 at 9.44.35 PM.mp3'
+            },
+
+            {
+                img: '295-remix.jpg',
+                heading: '295',
+                txt: 'Sidhu Moose Wala',
+                song:'WhatsApp Audio 2025-03-06 at 9.26.16 PM (2).mp3'
+            }
+        ];
+
+        let ele = '';
+        for (let i = 0;  i < songs.length; i++) {
+            ele += `
+             <div class="song1" onclick='fun(${i})'>
+            <div ><img class="img1" src="images/${songs[i].img}" alt="" height="100px"></div>
+            <div class="containt">
+            <div class="heading">${songs[i].heading}</div>
+            <div class="txt">${songs[i].txt}</div>
+            </div>
+            </div>
+               `
+        }
+
+
+        document.getElementsByClassName('item2')[0].innerHTML = ele;
+
+        function fun(x) {
+            img.src = `images/${songs[x].img}`;
+            heading.innerHTML = `${songs[x].heading}`;
+            txt.innerHTML = `${songs[x].txt}`;
+            music.src=`audio/${songs[x].song}`;
+            playpause.classList.remove('bi-play-circle-fill');
+            playpause.classList.add('bi-pause-circle-fill');
+          
+                music.play();
+           
+        }
+
+        fun(0);
+
+
+        let num = 0;
+        function changeSong(x) {
+
+            if (x == 0) {
+                num--;
+                if (num < 0) {
+                    num = songs.length - 1;
+                }
+
+            }
+            else {
+                num++;
+                if (num > songs.length - 1) {
+                    num = 0;
+
+                }
+            }
+            img.src = `images/${songs[num].img}`;
+            heading.innerHTML = `${songs[num].heading}`;
+            txt.innerHTML = `${songs[num].txt}`;
+            music.src=`audio/${songs[num].song}`;
+            music.play();
+            playpause.classList.remove('bi-play-circle-fill');
+            playpause.classList.add('bi-pause-circle-fill');
+        }
+
+
+
+        function ply(){
+            
+            if(playpause.classList[1]=='bi-play-circle-fill'){
+                playpause.classList.remove('bi-play-circle-fill');
+                playpause.classList.add('bi-pause-circle-fill');
+                music.play();
+                
+            }else{
+                
+                playpause.classList.remove('bi-pause-circle-fill');
+                playpause.classList.add('bi-play-circle-fill');
+                music.pause();
+            }
+
+
+
+        }
+
+       
+    </script>
+
+</body>
+
+
+</html>
